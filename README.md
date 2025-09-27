@@ -16,76 +16,88 @@
         .task-item.completed .task-time,
         .task-item.completed .task-remarks {
             text-decoration: line-through;
-            color: #9ca3af;
+            color: #475569; /* slate-600 */
         }
         .progress-bar-fill {
             transition: width 0.5s ease-in-out;
         }
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f5f9; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        ::-webkit-scrollbar-track { background: #1e293b; } /* slate-800 */
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 10px; } /* slate-600 */
+        ::-webkit-scrollbar-thumb:hover { background: #64748b; } /* slate-500 */
         #loading-overlay {
             z-index: 9999;
         }
+        .glow-card {
+            background-color: rgba(30, 41, 59, 0.5); /* bg-slate-800/50 */
+            backdrop-filter: blur(12px);
+            border: 1px solid #334155; /* border-slate-700 */
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.1);
+        }
+        .text-gradient {
+            background-image: linear-gradient(to right, #a855f7, #3b82f6); /* from-purple-500 to-blue-500 */
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
     </style>
 </head>
-<body class="bg-slate-100 text-slate-800 antialiased">
+<body class="bg-gray-900 text-slate-300 antialiased">
 
     <!-- Loading Overlay -->
-    <div id="loading-overlay" class="fixed inset-0 bg-white flex flex-col items-center justify-center transition-opacity duration-500">
-        <svg class="animate-spin h-10 w-10 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+    <div id="loading-overlay" class="fixed inset-0 bg-gray-900 flex flex-col items-center justify-center transition-opacity duration-500">
+        <svg class="animate-spin h-10 w-10 text-purple-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
-        <p class="mt-4 text-lg text-slate-600 font-semibold">Loading Your Profile, BOSS...</p>
+        <p class="mt-4 text-lg text-slate-400 font-semibold">Loading Your Profile, BOSS...</p>
     </div>
 
     <!-- Main Container -->
     <div class="container mx-auto max-w-4xl p-4 sm:p-6 lg:p-8 opacity-0" id="main-content">
         
         <header class="text-center mb-8">
-            <h1 class="text-4xl sm:text-5xl font-bold text-slate-900">Daily Target Tracker</h1>
-            <p id="current-date" class="text-slate-500 mt-2 text-lg">Seize the day, BOSS!</p>
+            <h1 class="text-4xl sm:text-5xl font-bold text-gradient">Daily Target Tracker</h1>
+            <p id="current-date" class="text-slate-400 mt-2 text-lg">Seize the day, BOSS!</p>
         </header>
 
         <!-- Player Stats -->
-        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
-             <h2 class="text-xl font-semibold mb-4 text-center">Your Profile</h2>
+        <div class="glow-card rounded-xl p-6 mb-8">
+             <h2 class="text-xl font-semibold mb-4 text-center text-slate-200">Your Profile</h2>
              <div class="flex justify-around items-center text-center">
                 <div>
-                    <p class="text-slate-500 text-sm font-medium">LEVEL</p>
-                    <p id="player-level" class="text-3xl font-bold text-indigo-600">1</p>
+                    <p class="text-slate-400 text-sm font-medium">LEVEL</p>
+                    <p id="player-level" class="text-3xl font-bold text-gradient">1</p>
                 </div>
                 <div>
-                    <p class="text-slate-500 text-sm font-medium">STREAK</p>
-                    <p id="player-streak" class="text-3xl font-bold text-amber-500">0 Days</p>
+                    <p class="text-slate-400 text-sm font-medium">STREAK</p>
+                    <p id="player-streak" class="text-3xl font-bold text-amber-400">0 Days</p>
                 </div>
                 <div>
-                    <p class="text-slate-500 text-sm font-medium">USER ID</p>
-                    <p id="user-id-display" class="text-xs text-slate-400 font-mono truncate w-24" title="Your unique User ID"></p>
+                    <p class="text-slate-400 text-sm font-medium">USER ID</p>
+                    <p id="user-id-display" class="text-xs text-slate-500 font-mono truncate w-24" title="Your unique User ID"></p>
                 </div>
              </div>
         </div>
 
         <!-- Add Task Form -->
-        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
-            <h2 class="text-2xl font-semibold mb-4">Add a New Target</h2>
+        <div class="glow-card rounded-xl p-6 mb-8">
+            <h2 class="text-2xl font-semibold mb-4 text-slate-200">Add a New Target</h2>
             <form id="task-form" class="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
                 <div class="col-span-1 md:col-span-2">
-                    <label for="task-input" class="block text-sm font-medium text-slate-600 mb-1">Target Description</label>
-                    <input type="text" id="task-input" placeholder="What's your main objective?" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" required>
+                    <label for="task-input" class="block text-sm font-medium text-slate-400 mb-1">Target Description</label>
+                    <input type="text" id="task-input" placeholder="What's your main objective?" class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-white transition" required>
                 </div>
                 <div>
-                    <label for="task-time" class="block text-sm font-medium text-slate-600 mb-1">Time</label>
-                    <input type="time" id="task-time" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" required>
+                    <label for="task-time" class="block text-sm font-medium text-slate-400 mb-1">Time</label>
+                    <input type="time" id="task-time" class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-white transition" required>
                 </div>
                 <div>
-                    <label for="task-remarks" class="block text-sm font-medium text-slate-600 mb-1">Remarks</label>
-                    <input type="text" id="task-remarks" placeholder="Any notes or details?" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+                    <label for="task-remarks" class="block text-sm font-medium text-slate-400 mb-1">Remarks</label>
+                    <input type="text" id="task-remarks" placeholder="Any notes or details?" class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-white transition">
                 </div>
                 <div class="col-span-1 md:col-span-2">
-                    <button type="submit" class="w-full bg-indigo-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 transform hover:scale-105">
+                    <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-blue-500 text-white font-semibold py-3 px-4 rounded-lg hover:from-purple-700 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-purple-500 transition duration-300 transform hover:scale-105">
                         Add Target
                     </button>
                 </div>
@@ -93,14 +105,14 @@
         </div>
 
         <!-- Progress Bar -->
-        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
-            <h2 class="text-xl font-semibold mb-3">Today's Progress</h2>
-            <div class="w-full bg-slate-200 rounded-full h-6">
-                <div id="progress-bar-fill" class="bg-green-500 h-6 rounded-full flex items-center justify-center text-white font-bold text-sm progress-bar-fill" style="width: 0%;">
+        <div class="glow-card rounded-xl p-6 mb-8">
+            <h2 class="text-xl font-semibold mb-3 text-slate-200">Today's Progress</h2>
+            <div class="w-full bg-slate-700 rounded-full h-6">
+                <div id="progress-bar-fill" class="bg-gradient-to-r from-green-400 to-blue-500 h-6 rounded-full flex items-center justify-center text-white font-bold text-sm progress-bar-fill" style="width: 0%;">
                     <span id="progress-text">0%</span>
                 </div>
             </div>
-             <div id="completion-message" class="text-center mt-4 text-lg font-semibold text-green-600 hidden">
+             <div id="completion-message" class="text-center mt-4 text-lg font-semibold text-green-400 hidden">
                 🎉 All targets completed for today! Great work, BOSS! 🎉
             </div>
         </div>
@@ -108,47 +120,47 @@
         <!-- Task List -->
         <div id="task-list-container">
             <div class="flex justify-between items-center mb-4">
-                <h2 class="text-2xl font-semibold">Your Targets</h2>
-                <button id="clear-all-btn" class="text-sm text-red-500 hover:text-red-700 font-medium transition">Clear All</button>
+                <h2 class="text-2xl font-semibold text-slate-200">Your Targets</h2>
+                <button id="clear-all-btn" class="text-sm text-red-500 hover:text-red-400 font-medium transition">Clear All</button>
             </div>
             <div id="task-list" class="space-y-4">
-                 <p id="empty-state" class="text-center text-slate-500 py-8 bg-white rounded-xl shadow-md">Your target list is empty. Add a new target to get started!</p>
+                 <p id="empty-state" class="text-center text-slate-400 py-8 glow-card rounded-xl">Your target list is empty. Add a new target to get started!</p>
             </div>
         </div>
     </div>
 
     <!-- Edit Modal -->
-    <div id="edit-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
-        <div class="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md">
-            <h2 class="text-2xl font-semibold mb-6">Edit Target</h2>
+    <div id="edit-modal" class="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm flex items-center justify-center p-4 hidden z-50">
+        <div class="glow-card rounded-xl p-8 w-full max-w-md">
+            <h2 class="text-2xl font-semibold mb-6 text-slate-200">Edit Target</h2>
             <form id="edit-task-form">
                 <input type="hidden" id="edit-task-id">
                 <div class="mb-4">
-                    <label for="edit-task-input" class="block text-sm font-medium text-slate-600 mb-1">Target Description</label>
-                    <input type="text" id="edit-task-input" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" required>
+                    <label for="edit-task-input" class="block text-sm font-medium text-slate-400 mb-1">Target Description</label>
+                    <input type="text" id="edit-task-input" class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-white transition" required>
                 </div>
                 <div class="mb-4">
-                    <label for="edit-task-time" class="block text-sm font-medium text-slate-600 mb-1">Time</label>
-                    <input type="time" id="edit-task-time" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" required>
+                    <label for="edit-task-time" class="block text-sm font-medium text-slate-400 mb-1">Time</label>
+                    <input type="time" id="edit-task-time" class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-white transition" required>
                 </div>
                 <div class="mb-6">
-                    <label for="edit-task-remarks" class="block text-sm font-medium text-slate-600 mb-1">Remarks</label>
-                    <input type="text" id="edit-task-remarks" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+                    <label for="edit-task-remarks" class="block text-sm font-medium text-slate-400 mb-1">Remarks</label>
+                    <input type="text" id="edit-task-remarks" class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-white transition">
                 </div>
                 <div class="flex justify-end gap-4">
-                    <button type="button" id="cancel-edit-btn" class="bg-slate-200 text-slate-800 font-semibold py-2 px-6 rounded-lg hover:bg-slate-300 transition">Cancel</button>
-                    <button type="submit" class="bg-indigo-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-indigo-700 transition">Save Changes</button>
+                    <button type="button" id="cancel-edit-btn" class="bg-slate-600 text-slate-200 font-semibold py-2 px-6 rounded-lg hover:bg-slate-700 transition">Cancel</button>
+                    <button type="submit" class="bg-gradient-to-r from-purple-600 to-blue-500 text-white font-semibold py-2 px-6 rounded-lg hover:from-purple-700 hover:to-blue-600 transition">Save Changes</button>
                 </div>
             </form>
         </div>
     </div>
     
     <!-- Notification Modal -->
-    <div id="notification-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
-        <div class="bg-white rounded-xl shadow-2xl p-8 w-full max-w-sm text-center">
-            <h2 id="notification-title" class="text-2xl font-bold mb-4"></h2>
-            <p id="notification-message" class="text-slate-600 mb-6"></p>
-            <button id="notification-close-btn" class="bg-indigo-600 text-white font-semibold py-2 px-8 rounded-lg hover:bg-indigo-700 transition">Got it</button>
+    <div id="notification-modal" class="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm flex items-center justify-center p-4 hidden z-50">
+        <div class="glow-card rounded-xl p-8 w-full max-w-sm text-center">
+            <h2 id="notification-title" class="text-2xl font-bold text-gradient mb-4"></h2>
+            <p id="notification-message" class="text-slate-300 mb-6"></p>
+            <button id="notification-close-btn" class="bg-gradient-to-r from-purple-600 to-blue-500 text-white font-semibold py-2 px-8 rounded-lg hover:from-purple-700 hover:to-blue-600 transition">Got it</button>
         </div>
     </div>
 
@@ -235,15 +247,15 @@
 
             currentTasks.sort((a,b) => a.time.localeCompare(b.time)).forEach(task => {
                 const taskItem = document.createElement('div');
-                taskItem.className = `task-item bg-white rounded-xl shadow-md p-4 flex items-center gap-4 transition-all duration-300 ${task.completed ? 'completed' : ''}`;
+                taskItem.className = `task-item glow-card rounded-xl p-4 flex items-center gap-4 transition-all duration-300 ${task.completed ? 'completed opacity-50' : ''}`;
                 taskItem.dataset.id = task.id;
                 taskItem.innerHTML = `
                     <div class="flex-shrink-0">
-                        <input type="checkbox" class="h-6 w-6 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer" ${task.completed ? 'checked' : ''}>
+                        <input type="checkbox" class="h-6 w-6 rounded border-gray-500 bg-slate-700 text-purple-500 focus:ring-purple-600 cursor-pointer" ${task.completed ? 'checked' : ''}>
                     </div>
                     <div class="flex-grow">
-                        <p class="task-text font-semibold text-slate-800">${task.text}</p>
-                        <div class="flex items-center gap-4 text-sm text-slate-500 mt-1">
+                        <p class="task-text font-semibold text-slate-200">${task.text}</p>
+                        <div class="flex items-center gap-4 text-sm text-slate-400 mt-1">
                             <span class="task-time flex items-center gap-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                                 ${new Date('1970-01-01T' + task.time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
@@ -255,10 +267,10 @@
                         </div>
                     </div>
                     <div class="flex-shrink-0 flex gap-2">
-                        <button class="edit-btn p-2 text-slate-500 hover:text-indigo-600 rounded-full hover:bg-slate-100 transition">
+                        <button class="edit-btn p-2 text-slate-400 hover:text-purple-400 rounded-full hover:bg-slate-700 transition">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L15.232 5.232z" /></svg>
                         </button>
-                        <button class="delete-btn p-2 text-slate-500 hover:text-red-600 rounded-full hover:bg-slate-100 transition">
+                        <button class="delete-btn p-2 text-slate-400 hover:text-red-500 rounded-full hover:bg-slate-700 transition">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                         </button>
                     </div>
