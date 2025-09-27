@@ -380,14 +380,23 @@
 
 
         // --- APP STARTUP ---
+        let hasProcessedInitialUser = false;
+
         onAuthStateChanged(auth, user => {
             if (user) {
                 userId = user.uid;
                 if(unsubscribeUser) unsubscribeUser();
                 if(unsubscribeDailyData) unsubscribeDailyData();
+                hasProcessedInitialUser = false; // Reset on user change
 
                 const { userDocRef, dailyDataDocRef } = getRefs();
 
+                // Set up today's tasks listener
+                unsubscribeDailyData = onSnapshot(dailyDataDocRef, (docSnap) => {
+                    currentTasks = docSnap.exists() ? docSnap.data().tasks || [] : [];
+                    renderTasks();
+                });
+                
                 // Set up user profile listener
                 unsubscribeUser = onSnapshot(userDocRef, (docSnap) => {
                     if (docSnap.exists()) {
@@ -400,21 +409,19 @@
                     }
                     userIdDisplayEl.textContent = userId;
                     userIdDisplayEl.title = userId;
-                });
-                
-                // Set up today's tasks listener
-                unsubscribeDailyData = onSnapshot(dailyDataDocRef, (docSnap) => {
-                    currentTasks = docSnap.exists() ? docSnap.data().tasks || [] : [];
-                    renderTasks();
-                });
 
-                // Check yesterday's progress for leveling
-                checkAndProcessYesterday();
+                    if (!hasProcessedInitialUser) {
+                        hasProcessedInitialUser = true;
 
-                // Show the main content
-                loadingOverlay.classList.add('opacity-0');
-                mainContent.classList.remove('opacity-0');
-                setTimeout(() => loadingOverlay.classList.add('hidden'), 500);
+                        // Check yesterday's progress for leveling
+                        checkAndProcessYesterday();
+
+                        // Show the main content
+                        loadingOverlay.classList.add('opacity-0');
+                        mainContent.classList.remove('opacity-0');
+                        setTimeout(() => loadingOverlay.classList.add('hidden'), 500);
+                    }
+                });
 
             } else {
                  // No user, sign them in
